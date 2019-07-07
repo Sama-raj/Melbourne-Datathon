@@ -1,0 +1,59 @@
+```{r}
+traffic <- read_csv("C:/Sem3/LEP/LEP proj/Datathon/car_speeds-20180729T074602Z-001/car_speeds/melbourne_vehicle_traffic.csv")
+head(traffic)
+```
+
+```{r}
+library(tidyr)
+colnms <- c("Mon_00",	"Mon_01",	"Mon_02", "Mon_03",	'Mon_04',	'Mon_05',	'Mon_06',	'Mon_07',	'Mon_08',	'Mon_09',	'Mon_10',	'Mon_11',	'Mon_12',	'Mon_13',	'Mon_14',	'Mon_15',	'Mon_16',	'Mon_17','Mon_18',	'Mon_19',	'Mon_20',	'Mon_21',	'Mon_22',	'Mon_23',	'Tue_00',	'Tue_01',	'Tue_02',	'Tue_03',	'Tue_04',	'Tue_05',	'Tue_06',	'Tue_07',	'Tue_08',	'Tue_09',	'Tue_10',	'Tue_11',	'Tue_12',	'Tue_13',	'Tue_14',	'Tue_15',	'Tue_16',	'Tue_17',	'Tue_18',	'Tue_19',	'Tue_20',	'Tue_21',	'Tue_22',	'Tue_23',	'Wed_00',	'Wed_01',	'Wed_02',	'Wed_03',	'Wed_04',	'Wed_05',	'Wed_06',	'Wed_07',	'Wed_08',	'Wed_09',	'Wed_10',	'Wed_11',	'Wed_12',	'Wed_13',	'Wed_14',	'Wed_15',	'Wed_16',	'Wed_17',	'Wed_18',	'Wed_19',	'Wed_20',	'Wed_21',	'Wed_22',	'Wed_23',	'Thur_00',	'Thur_01',	'Thur_02',	'Thur_03',	'Thur_04',	'Thur_05',	'Thur_06',	'Thur_07',	'Thur_08',	'Thur_09',	'Thur_10',	'Thur_11',	'Thur_12','Thur_13',	'Thur_14',	'Thur_15', 'Thur_16',	'Thur_17',	'Thur_18',	'Thur_19',	'Thur_20',	'Thur_21',	'Thur_22',	'Thur_23',	'Fri_00',	'Fri_01',	'Fri_02',	'Fri_03',	'Fri_04',	'Fri_05',	'Fri_06',	'Fri_07',	'Fri_08',	'Fri_09',	'Fri_10',	'Fri_11',	'Fri_12',	'Fri_13',	'Fri_14',	'Fri_15',	'Fri_16',	'Fri_17',	'Fri_18',	'Fri_19',	'Fri_20',	'Fri_21',	'Fri_22',	'Fri_23')
+
+```
+
+```{r}
+traffic <- separate(traffic, mean_speed, colnms, sep=", " )
+
+```
+
+```{r}
+head(traffic)
+```
+
+```{r}
+library(stringr)
+traffic$Mon_00 <- substr(traffic$Mon_00, start = 2, stop = str_length(traffic$Mon_00))
+
+```
+
+
+```{r}
+traffic$Fri_23 <- substr(traffic$Fri_23, 1, (str_length(traffic$Fri_23)-1))
+```
+
+
+```{r}
+head(traffic)
+```
+
+```{r}
+colnms1 <- c("SDMon_00",	"SDMon_01",	"SDMon_02", "SDMon_03",	'SDMon_04',	'SDMon_05',	'SDMon_06',	'SDMon_07',	'SDMon_08',	'SDMon_09',	'SDMon_10',	'SDMon_11',	'SDMon_12',	'SDMon_13',	'SDMon_14',	'SDMon_15',	'SDMon_16',	'SDMon_17','SDMon_18',	'SDMon_19',	'SDMon_20',	'SDMon_21',	'SDMon_22',	'SDMon_23',	'SDTue_00',	'SDTue_01',	'SDTue_02',	'SDTue_03',	'SDTue_04',	'SDTue_05',	'SDTue_06',	'SDTue_07',	'SDTue_08',	'SDTue_09',	'SDTue_10',	'SDTue_11',	'SDTue_12',	'SDTue_13',	'SDTue_14',	'SDTue_15',	'SDTue_16',	'SDTue_17',	'SDTue_18',	'SDTue_19',	'SDTue_20',	'SDTue_21',	'SDTue_22',	'SDTue_23',	'SDWed_00',	'SDWed_01',	'SDWed_02',	'SDWed_03',	'SDWed_04',	'SDWed_05',	'SDWed_06',	'SDWed_07',	'SDWed_08',	'SDWed_09',	'SDWed_10',	'SDWed_11',	'SDWed_12',	'SDWed_13',	'SDWed_14',	'SDWed_15',	'SDWed_16',	'SDWed_17',	'SDWed_18',	'SDWed_19',	'SDWed_20',	'SDWed_21',	'SDWed_22',	'SDWed_23',	'SDThur_00',	'SDThur_01',	'SDThur_02',	'SDThur_03',	'SDThur_04',	'SDThur_05',	'SDThur_06',	'SDThur_07',	'SDThur_08',	'SDThur_09',	'SDThur_10',	'SDThur_11',	'SDThur_12','SDThur_13',	'SDThur_14',	'SDThur_15', 'SDThur_16',	'SDThur_17',	'SDThur_18',	'SDThur_19',	'SDThur_20',	'SDThur_21',	'SDThur_22',	'SDThur_23',	'SDFri_00',	'SDFri_01',	'SDFri_02',	'SDFri_03',	'SDFri_04',	'SDFri_05',	'SDFri_06',	'SDFri_07',	'SDFri_08',	'SDFri_09',	'SDFri_10',	'SDFri_11',	'SDFri_12',	'SDFri_13',	'SDFri_14',	'SDFri_15',	'SDFri_16',	'SDFri_17',	'SDFri_18',	'SDFri_19',	'SDFri_20',	'SDFri_21',	'SDFri_22',	'SDFri_23')
+```
+
+```{r}
+traffic <- separate(traffic, std_speed, colnms1, sep=", " )
+head(traffic)
+```
+
+```{r}
+traffic$SDMon_00 <- substr(traffic$SDMon_00, start = 2, stop = str_length(traffic$SDMon_00))
+traffic$SDFri_23 <- substr(traffic$SDFri_23, 1, (str_length(traffic$SDFri_23)-1))
+head(traffic)
+```
+```{r}
+write.csv(traffic,file = "clean_carspeeds.csv")
+```
+
+
+```{r}
+
+```
+
